@@ -1,38 +1,29 @@
+import axios from "axios";
+
 const actionType = {
     fetchJobs: 'FETCH_JOBS',
     displayJobs: 'DISPLAY_JOBS'
 }
 
-// export const fetchJobs = () => dispatch => {
-//     console.log(jobsData,"---data is here---")
-//     fetch('https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823', {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         // body: JSON.stringify(jobs)
-//     })
-//     .then(res => {res.json(), console.log(res, "--response is here--")})
-//     .then(jobs => dispatch({
-//         type: fetchJobs,
-//         payload: jobs
-//     }))
-//     // .then(data => console.log(data,"---data is here---"))
-//     .catch(err => console.log(err,"--error is here--"))
-
-// }
-
+const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823'
 
 export const fetchJobs = () => dispatch => {
-    fetch('https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823')
-      .then(res => res.json())
-      .then(jobs =>
+    const cancelToken1 = axios.CancelToken.source()
+    axios.get(BASE_URL, {
+        cancelToken: cancelToken1.token,
+        params: { markdown: true }
+      })
+      .then(res => {
+          console.log(res,"--res is here---")
         dispatch({
-          type: fetchJobs,
-          payload: jobs
-        })
+            type: fetchJobs,
+            payload: res.data
+          })
+      }
+      
       );
   };
+
 
 export const displayJobs = () => ({
     type: actionType.showJobs

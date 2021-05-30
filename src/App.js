@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import  store  from '../src/library/store/store'
 import Dashboard from '../src/Containers/Dashboard/dashboard'
 
-
 function App() {
   return (
     <Provider store={store}>
@@ -28,5 +27,7 @@ function App() {
     </Provider>
   );
 }
+
+
 
 export default App;

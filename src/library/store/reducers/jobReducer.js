@@ -2,7 +2,7 @@ import { fetchJobs, showJobs } from '../actions/jobActions'
 
 const initialState = {
     items: [],
-    items: {}
+    item: {}
 }
 
 export const jobReducer = (state=initialState, action) => {
