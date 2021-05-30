@@ -5,13 +5,7 @@ import { fetchJobs }  from '../../library/store/actions/jobActions';
 import axios from "axios"
 
  class Dashboard extends Component {
-    // constructor(){
-    //     super()
-    //     // this.state={
-    //     //   jobs: []
-    //     // }
-    // }
-
+    
 componentWillMount(){
     this.props.fetchJobs()
 }
@@ -22,7 +16,6 @@ componentWillMount(){
               <h3>{job.title}</h3>
               <p>{job.type}</p>
               <p>{job.company}</p>
-              {/* <p>{job.description}</p> */}
               <p>{job.location}</p>
             </div>
           ));
