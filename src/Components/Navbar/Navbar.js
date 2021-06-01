@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import Search from '../Search/Search'
 import Switch from "react-switch";
 import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
+
 // import SearchIcon from "@material-ui/icons/Search";
-import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input"
-import SearchIcon from "@material-ui/icons/Search";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Button from "@material-ui/core/Button"
+
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { Container } from "@material-ui/core";
@@ -49,43 +44,7 @@ function NavBar() {
           />
           <Brightness3Icon style={{ color: "white"}}/>
         </div>
-        <div className="down-content">
-            <Input
-            placeholder="Filter by title, companies, expertise..."
-          id="input-with-icon-adornment"
-          className="TextField-filter"
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchIcon color="primary" />
-            </InputAdornment>
-          }
-        />
-            <Input
-            placeholder="Filter bu location..."
-          id="input-with-icon-adornment"
-          className="TextField-loc"
-          startAdornment={
-            <InputAdornment position="start">
-              <LocationOnIcon color="primary" />
-            </InputAdornment>
-          }
-        />
-        <FormControlLabel className="check-input"
-        control={
-          <Checkbox
-            // checked={state.checkedB}
-            // onChange={handleChange}
-            name="checkedB"
-            color="primary"
-          />
-        }
-        label="Full Time Only"
-        
-      />
-      <Button className="search-button" variant="contained" color="primary">
-  Search
-</Button>
-        </div>
+       <Search />
       </nav>
     </>
   );

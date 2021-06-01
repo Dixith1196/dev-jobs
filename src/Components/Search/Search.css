@@ -1,0 +1,33 @@
+.down-content{
+    background-color: white;
+    justify-content: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: 80px;
+    border: black 1px ;
+    border-radius: 5px;
+    margin-right: 80px;
+    margin-left: 80px;
+    z-index : 1;
+    position: absolute;
+}
+.TextField-filter{
+  width: 480px;
+  height: 50px;
+  background-color: white;
+  fill: white;
+  padding-left: 15px;
+}
+.TextField-loc{
+  width: 400px;
+  height: 50px;
+  border: black 5px;
+  padding-left: 15px;
+}
+.check-input{
+    padding-left: 15px;
+}
+.search-button{
+    padding-right: 15px;
+    margin-right: 15px;
+}
