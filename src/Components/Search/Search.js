@@ -32,6 +32,7 @@ import Button from "@material-ui/core/Button"
       setChecked(!checked)
     }
 
+
     const filterResults = () => {
       if(query != "" && location == "" && checked == false){
         props.fetchTermJobs(query)

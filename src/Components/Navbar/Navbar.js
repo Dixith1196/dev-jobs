@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-import Search from '../Search/Search'
+import { connect } from 'react-redux'
+import { setLightTheme, setDarkTheme } from '../../library/store/actions/themeActions'
+ import Search from '../Search/Search'
 import Switch from "react-switch";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -11,10 +13,22 @@ import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { Container } from "@material-ui/core";
 
-function NavBar() {
-  const [click, setClick] = useState(false);
+function NavBar(props) {
+ 
+  const [toggle, setToggle]=useState(false);
 
-  const handleClick = () => setClick(!click);
+  const handleClick = () => {
+    setToggle(!toggle);
+  }
+
+  React.useEffect(() => {
+    if (toggle == false) {
+     props.setLightTheme()
+    } else {
+      props.setDarkTheme()
+    }
+  }, [toggle]);
+
   return (
     <>
       <nav className="navbar">
@@ -28,8 +42,8 @@ function NavBar() {
           </div>
           
           <Switch
-            // checked={this.state.checked}
-            // onChange={this.handleChange}
+            checked={toggle}
+            onChange={handleClick}
             onColor="#86d3ff"
             onHandleColor="#2693e6"
             handleDiameter={30}
@@ -50,4 +64,9 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+const mapStateToProps = state => ({
+  theme: state.themes.theme
+})
+
+
+export default connect(mapStateToProps, {setLightTheme, setDarkTheme})(NavBar);
