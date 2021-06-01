@@ -9,7 +9,7 @@
     margin-right: 80px;
     margin-left: 80px;
     z-index : 1;
-    position: absolute;
+    position: relative;
 }
 .TextField-filter{
   width: 480px;

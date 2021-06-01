@@ -17,6 +17,8 @@ function NavBar(props) {
  
   const [toggle, setToggle]=useState(false);
 
+  console.log(props.toggle,"---toggle is here")
+
   const handleClick = () => {
     setToggle(!toggle);
   }
@@ -58,14 +60,15 @@ function NavBar(props) {
           />
           <Brightness3Icon style={{ color: "white"}}/>
         </div>
-       <Search />
+       {/* <Search /> */}
       </nav>
     </>
   );
 }
 
 const mapStateToProps = state => ({
-  theme: state.themes.theme
+  theme: state.themes.theme,
+  toggle: state.themes.toggle
 })
 
 

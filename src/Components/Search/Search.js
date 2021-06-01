@@ -55,7 +55,7 @@ import Button from "@material-ui/core/Button"
     }
 
     return (
-        <div>
+        // <div>
              <div className="down-content">
             <Input
             placeholder="Filter by title, companies, expertise..."
@@ -103,7 +103,7 @@ import Button from "@material-ui/core/Button"
   Search
 </Button>
         </div>
-        </div>
+        // </div>
     )
 }
 

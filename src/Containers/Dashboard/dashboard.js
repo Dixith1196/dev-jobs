@@ -55,8 +55,9 @@ import Search from '../../Components/Search/Search'
   }
   const classes = useStyles();
         return(
+          <Container>
+          <Search />
           <Container  style={{padding: "7%"}}>
-            {/* <Search /> */}
           <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
                   <Grid item xs={12} sm={6} md={4} key={props.jobs.id}>
@@ -82,6 +83,7 @@ import Search from '../../Components/Search/Search'
                   </Grid>
                           ))};
           </Grid>
+      </Container>
       </Container>
         )
     }

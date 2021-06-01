@@ -1,7 +1,8 @@
 import { setLightTheme, setDarkTheme } from '../actions/themeActions'
 
 const initialState = {
-    theme: "light"
+    theme: "light",
+    toggle: false
 }
 
 export const themeReducer = (state=initialState, action) => {

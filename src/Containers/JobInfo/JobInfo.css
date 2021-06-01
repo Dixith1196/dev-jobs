@@ -1,0 +1,40 @@
+.search-button{
+    align-items: center;
+    justify-self: center;
+    margin-top: 20px;
+}
+.site-button{
+    /* margin-top: auto; */
+    /* align-content: right; */
+    /* align-items: right; */
+    /* position: absolute; */
+    margin:absolute
+}
+.logo-part{
+    background-color: tomato;
+}
+
+.topo1{
+    align-items: center;
+    font-weight: 900;
+    padding: 50px;
+}
+
+.root{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.details{
+    display: flex;
+    /* flexDirection: column, */
+    padding-left: 30px;
+    padding-top: 10px;
+  }
+.content{
+    flex: 1 0 auto;
+    /* padding-left: 30px; */
+  }
+.cover{
+    width: 151;
+  }
