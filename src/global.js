@@ -12,20 +12,10 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
   }
-  
-  .App-header {
-    background-color: pink;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+ 
+  .MuiCard-root {
+    background: ${({ theme }) => theme.Card} !important;
+    color: ${({ theme }) => theme.text};
   }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  `
+
+    `

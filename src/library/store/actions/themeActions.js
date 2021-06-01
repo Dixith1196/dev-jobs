@@ -15,7 +15,7 @@ export const setLightTheme = () => dispatch => {
   export const setDarkTheme = () => dispatch => {
     console.log("dark calls------")
     dispatch({
-        type: setLightTheme,
+        type: setDarkTheme,
         payload: "dark"
       })
   } 

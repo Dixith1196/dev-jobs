@@ -16,14 +16,14 @@ import JobInfo from "./Containers/JobInfo/JobInfo"
 
 function App(props) {
 
-  const theme = {
-    theme: props.theme
-  }
-console.log(props.theme,"--theme is here--")
+  // const theme = {
+  //   theme: theme
+  // }
+//console.log(theme,"--theme is here--")
   return (
 <div className="App">
-<ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-{/* <GlobalStyles /> */}
+<ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
+<GlobalStyles />
 <Router>
         <NavBar />
         <Switch>

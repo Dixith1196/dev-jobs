@@ -94,7 +94,8 @@ const mapStateToProps = state => ({
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-  },
+  }
+  ,
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
