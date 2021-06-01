@@ -1,7 +1,13 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  align-items: center;
 }
-
+/* .body{
+  background-color: rgb(233, 229, 229);
+} */
+.logo{
+  padding: 10px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -14,7 +20,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: pink;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

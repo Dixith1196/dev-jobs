@@ -3,26 +3,21 @@ import './App.css';
 import { Provider } from 'react-redux'
 import  store  from '../src/library/store/store'
 import Dashboard from '../src/Containers/Dashboard/dashboard'
+import * as ReactBootStrap from "react-bootstrap";
+import NavBar from "../src/Components/Navbar/Navbar"
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+// import SpecificJob from "./components/SpecificJob"
 
 function App() {
   return (
-    <Provider store={store}>
+     <Provider store={store}>
 <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-        <Dashboard />
-      </header>
+<Router>
+        <NavBar />
+        <Switch>
+              <Route exact path='/' component={Dashboard} />
+          </Switch>
+      </Router>
     </div>
     </Provider>
   );

@@ -1,23 +1,53 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import { fetchJobs }  from '../../library/store/actions/jobActions';
+import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
 import axios from "axios"
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import "./dashboard.css"
+import { Container } from 'react-bootstrap';
+import Grid from '@material-ui/core/Grid';
+import Avatar from "@material-ui/core/Avatar"
 
- class Dashboard extends Component {
-    
-componentWillMount(){
-    this.props.fetchJobs()
-}
+ function Dashboard(props) {
 
-    render() {
-        const jobItems = this.props.jobs.map(job => (
+  const [mounted, setMounted] = useState(false)
+ 
+
+  if(!mounted){
+    // Code for componentWillMount here
+    // This code is called only one time before intial render
+    props.fetchFullTimeJobs("false") 
+  }
+
+  useEffect(() =>{
+    setMounted(true)
+  },[])
+  
+  function generateRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  const classes = useStyles();
+        return(
           <Container style={{}}>
           <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid item xs={12} sm={6} md={4} key={index}>
-                      <Card className={classes.root} >
+          {props.jobs.map((job) => (
+                  <Grid item xs={12} sm={6} md={4} key={props.jobs.id}>
+                      <Card className={classes.root}>
                       <CardContent>
-                          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                          <Avatar style={{backgroundColor: generateRandomColor()}} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                           {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
                           {user.id}
                           </Typography> */}
@@ -35,29 +65,42 @@ componentWillMount(){
                       </CardContent>
                   </Card>
                   </Grid>
+                          ))};
           </Grid>
       </Container>
-          ));
-          return (
-            <div>
-              <h1>Jobs</h1>
-              {jobItems}
-            </div>
-          );
+        )
     }
-}
-
-Dashboard.propTypes = {
-    fetchJobs: PropTypes.func.isRequired,
-    jobs: PropTypes.array.isRequired,
-    // newPost: PropTypes.object
-  };
 
 const mapStateToProps = state => ({
     jobs: state.jobs.items
 })
 
 
-export default connect(mapStateToProps, { fetchJobs })(Dashboard);
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+    borderRadius:"10%",
+    flex:"1"
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  root: {
+      // flexGrow: 1,
+    },
+});
+
+
+export default connect(mapStateToProps, { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs,
+  fetchFilterJobs
+})(Dashboard);
 
 
