@@ -18,7 +18,7 @@ function App(props) {
 
 
   if(!mounted){
-    if( localStorage.getItem("toggle") == true){
+    if( localStorage.getItem("toggle") === true){
       props.toggleTheme(true)
     }else{
       props.toggleTheme(false)
