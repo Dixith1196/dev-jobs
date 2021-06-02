@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {setLightTheme, setDarkTheme} from '../src/library/store/actions/themeActions'
+import React, { useState, useEffect } from 'react';
+import {setLightTheme, setDarkTheme, toggleTheme} from '../src/library/store/actions/themeActions'
 import { connect } from 'react-redux'
 import logo from './logo.svg';
 import './App.css';
@@ -16,6 +16,28 @@ import JobInfo from "./Containers/JobInfo/JobInfo"
 
 function App(props) {
 
+   const [mounted, setMounted] = useState(false)
+
+
+  if(!mounted){
+    if( localStorage.getItem("toggle") == true){
+      props.toggleTheme(true)
+    }else{
+      props.toggleTheme(false)
+    }
+  }
+
+  useEffect(() =>{
+     setMounted(true)
+  },[])
+
+
+  // if( localStorage.getItem("toggle") == false){
+  //   props.toggleTheme(true)
+  // }else{
+  //   props.toggleTheme(false)
+  // }
+  
   return (
 <div className="App">
 <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
@@ -37,4 +59,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {setLightTheme, setDarkTheme})(App);
+export default connect(mapStateToProps, {setLightTheme, setDarkTheme, toggleTheme})(App);

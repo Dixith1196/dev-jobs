@@ -15,11 +15,14 @@ const actionType = {
 
 const cors_url = "https://api.allorigins.win/raw?url="
 
-const BASE_URL = cors_url + `https://jobs.github.com/positions.json`
+const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
+
+// const cors_url = "https://cors-anywhere.herokuapp.com/"
+
+// const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
 
 
 export const getJobDescription = (jobId) => dispatch => {
-    console.log(jobId,"---job desc is called---")
     const JOB_BASE_URL = cors_url + `https://jobs.github.com/positions/${jobId}.json`
     const cancelToken1 = axios.CancelToken.source()
 
@@ -30,7 +33,6 @@ export const getJobDescription = (jobId) => dispatch => {
      },   
     })
       .then(res => {
-          console.log(res,"--job desc res is here--")
         dispatch({
             type: getJobDescription,
             payload: res.data
@@ -40,7 +42,6 @@ export const getJobDescription = (jobId) => dispatch => {
 }
 
 export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
-    console.log("---current location is called---")
     const cancelToken1 = axios.CancelToken.source()
     axios.get(BASE_URL, {
         cancelToken: cancelToken1.token,
@@ -51,7 +52,6 @@ export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
          }
       })
       .then(res => {
-          console.log(res,"--res is here---")
         dispatch({
             type: fetchCurrentLocationJobs,
             lat: lat,
@@ -64,18 +64,13 @@ export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
 }
 
 export const fetchTermJobs = (desc) => dispatch => {
-    console.log("---current term is called---")
     const cancelToken1 = axios.CancelToken.source()
     
-    axios.get(BASE_URL, {
+    axios.get(`${BASE_URL}description=${desc}`, {
         cancelToken: cancelToken1.token,
-        params: { 
-            markdown: true,
-            description: desc
-        }
       })
       .then(res => {
-          console.log(res,"--res is here---")
+          console.log(res, "---response is here---")
         dispatch({
             type: fetchTermJobs,
             desc: desc,
@@ -87,17 +82,11 @@ export const fetchTermJobs = (desc) => dispatch => {
 }
 
 export const fetchGivenLocationJobs = (location) => dispatch => {
-    console.log("---current given loc is called---")
     const cancelToken1 = axios.CancelToken.source()
-    axios.get(BASE_URL, {
+    axios.get(`${BASE_URL}location=${location}`, {
         cancelToken: cancelToken1.token,
-        params: { 
-            markdown: true,
-            location: location
-         }
       })
       .then(res => {
-          console.log(res,"--res is here---")
         dispatch({
             type: fetchGivenLocationJobs,
             payload: res.data,
@@ -110,17 +99,15 @@ export const fetchGivenLocationJobs = (location) => dispatch => {
 
 
 export const fetchFullTimeJobs = (fullTime) => dispatch => {
-    console.log("---current fulltime is called---")
     const cancelToken1 = axios.CancelToken.source()
-    axios.get(BASE_URL, {
+    axios.get(`${BASE_URL}full_time=${fullTime}`, {
         cancelToken: cancelToken1.token,
-        params: { 
-            markdown: true,
-            full_time: fullTime
-         }
+        // params: { 
+        //     markdown: true,
+        //     full_time: fullTime
+        //  }
       })
       .then(res => {
-          console.log(res,"--res is here---")
         dispatch({
             type: fetchFullTimeJobs,
             fullTime: fullTime,
@@ -132,19 +119,17 @@ export const fetchFullTimeJobs = (fullTime) => dispatch => {
 }
 
 export const fetchFilterJobs = (searchTerm, location, fullTime) => dispatch => {
-    console.log("---current filter is called---")
     const cancelToken1 = axios.CancelToken.source()
-    axios.get(BASE_URL, {
+    axios.get(`${BASE_URL}description=${searchTerm}location=${location}full_time=${fullTime}`, {
         cancelToken: cancelToken1.token,
-        params: { 
-            markdown: true,
-            description: searchTerm,
-            full_time: fullTime,
-            location: location
-         }
+        // params: { 
+        //     markdown: true,
+        //     description: searchTerm,
+        //     full_time: fullTime,
+        //     location: location
+        //  }
       })
       .then(res => {
-          console.log(res,"--res is here---")
         dispatch({
             type: fetchFilterJobs,
             payload: res.data,
@@ -165,7 +150,6 @@ export const fetchJobs = () => dispatch => {
         params: { markdown: true }
       })
       .then(res => {
-          console.log(res,"--res is here---")
         dispatch({
             type: fetchJobs,
             payload: res.data

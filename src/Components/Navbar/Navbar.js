@@ -14,50 +14,38 @@ import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { Container } from "@material-ui/core";
 
 function NavBar(props) {
+
+  // const [mounted, setMounted] = useState(false)
  
-  const [toggle, setToggle]=useState(false);
-
-  const [mounted, setMounted] = useState(false)
-
-
-  // if(!mounted){
-  //   // Code for componentWillMount here
-  //   // This code is called only one time before intial render
-  //   if(props.toggle == false){
-  //     setToggle(false)
-  //   }else{
-  //     setToggle(true)
-  //   }
-   
-  // }
-
-  useEffect(() =>{
-    setMounted(true)
-  },[])
-
-
-  console.log(props,"---toggle is here1")
-
   const handleClick = () => {
-   
-    // setToggle(!toggle);
     if(props.toggle == false){
       props.toggleTheme(true)
-      props.setDarkTheme()
+      localStorage.setItem("toggle", true)
+      localStorage.setItem("theme", "dark")
     }else{
       props.toggleTheme(false)
-      props.setLightTheme()
+      localStorage.setItem("toggle", false)
+      localStorage.setItem("theme", "light")
     }
-    console.log(props,"---toggle is here2")
   }
 
-  React.useEffect(() => {
-    if (toggle == false) {
-     props.setLightTheme()
-    } else {
-      props.setDarkTheme()
-    }
-  }, [toggle]);
+  // if(!mounted){
+  //   if( localStorage.getItem("toggle") == true){
+  //     props.toggleTheme(true)
+  //   }else{
+  //     props.toggleTheme(false)
+  //   }
+  // }
+
+  // useEffect(() =>{
+  //   // setMounted(true)
+  //   console.log("--use effect calls--")
+  //   if( localStorage.getItem("toggle") == true){
+  //     props.toggleTheme(true)
+  //   }else{
+  //     props.toggleTheme(false)
+  //   }
+  // },[])
 
   return (
     <>

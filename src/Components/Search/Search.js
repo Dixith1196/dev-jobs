@@ -19,12 +19,10 @@ import Button from "@material-ui/core/Button"
   const [checked, setChecked] = useState(false)
 
  const handleInputChange = event => {
-  console.log(query,"--query is here--")
     setQuery(event.target.value)
 };
 
   const handleLocationInputChange = event => {
-    console.log(location,"--location is here--")
     setLocation(event.target.value)
     };
 
@@ -34,6 +32,7 @@ import Button from "@material-ui/core/Button"
 
 
     const filterResults = () => {
+      console.log("filter results")
       if(query != "" && location == "" && checked == false){
         props.fetchTermJobs(query)
       }else if(query == "" && location != "" && checked == false){

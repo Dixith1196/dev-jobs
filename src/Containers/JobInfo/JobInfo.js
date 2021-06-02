@@ -31,6 +31,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import CardActions from '@material-ui/core/CardActions';
 import ExploreIcon from '@material-ui/icons/Explore';
+import createDOMPurify from 'dompurify'
+import { JSDOM } from 'jsdom'
 
 import { useParams } from "react-router";
 
@@ -70,6 +72,9 @@ function JobInfo(props) {
 
     let { id } = useParams();
 
+    const window = (new JSDOM('')).window
+    const DOMPurify = createDOMPurify(window)
+
     if(!mounted){
       // Code for componentWillMount here
       // This code is called only one time before intial render
@@ -105,7 +110,7 @@ function JobInfo(props) {
           <Typography component="h5" variant="h5">
            {jd.company}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="subtitle1" color="textSecondary" >
            {jd.company_url}
           </Typography>
         </CardContent>
@@ -133,60 +138,11 @@ function JobInfo(props) {
         title={jd.title}
         subheader={jd.location}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-     {jd.description}
+      <CardContent >
+        <Typography  variant="body2" color="textSecondary" component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.description) }}>
+     {/* {jd.description} */}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
-        <IconButton
-        //   className={clsx(classes.expand, {
-        //     [classes.expandOpen]: expanded,
-        //   })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {/* <Button  className="search-button" variant="contained" color="primary" style={{fontWeight: "bolder", margin:"30px"}}>
-            Show More
-        </Button> */}
-        <ExpandMoreIcon color="primary" style={{fontSize:"35px"}}/>
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph style={{fontWeight:"bolder"}}>Requirments</Typography>
-          <Typography paragraph>
-          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in 
-          some form, by injected humour
-          </Typography>
-          <Typography paragraph>
-          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in 
-          some form, by injected humour, or randomised words which don't look even slightly believable. If you are going 
-          to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of 
-          text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this
-          e first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-           of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem
-           Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-            without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-            medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-            again without stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
     </Card>
     </div>
 {/* ===================================== */}
@@ -196,8 +152,7 @@ function JobInfo(props) {
         title="How to Apply"
       />
       <CardContent>
-        <Typography variant="body2" color="white" component="p">
-       {jd.how_to_apply}
+        <Typography variant="body2" color="white" component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.how_to_apply) }}>
         </Typography>
       </CardContent>
     </Card>

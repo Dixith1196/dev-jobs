@@ -8,12 +8,11 @@ const actionType = {
 export const toggleTheme = (tog) => dispatch => {
     dispatch({
         type: toggleTheme,
-        payload: !tog
+        payload: tog
     })
 }
 
 export const setLightTheme = () => dispatch => {
-    console.log("light calls------")
     dispatch({
         type: setLightTheme,
         payload: "light"
@@ -21,7 +20,6 @@ export const setLightTheme = () => dispatch => {
   } 
 
   export const setDarkTheme = () => dispatch => {
-    console.log("dark calls------")
     dispatch({
         type: setDarkTheme,
         payload: "dark"

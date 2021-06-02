@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
+// import NavBar from "../../Components/Navbar/Navbar"
 import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -31,19 +32,13 @@ import Search from '../../Components/Search/Search'
    
 
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-
     if(!position.coords.latitude && !position.coords.longitude){
-      console.log("Current location is disabled")
     }else{
        props.fetchTermJobs("Java")
       // props.fetchCurrentLocationJobs(position.coords.latitude, position.coords.longitude) 
     }
     });
   }
-
-  console.log(props.jobs, "--jobs come up here--")
 
   useEffect(() =>{
     setMounted(true)
@@ -65,7 +60,8 @@ import Search from '../../Components/Search/Search'
   const classes = useStyles();
         return(
           <Container>
-          <Search />
+           {/* <NavBar />  */}
+          <Search style={{position: "relative", zIndex: 10}} />
           <Container  style={{padding: "7%"}}>
           <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
