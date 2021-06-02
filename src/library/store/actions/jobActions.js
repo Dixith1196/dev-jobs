@@ -9,14 +9,13 @@ const actionType = {
     fetchFilterJobs: 'FETCH_FILTER_JOBS',
     displayJobs: 'DISPLAY_JOBS',
     getJobDescription: 'GET_JOB_DESCRIPTION',
-    setPage: 'SET_PAGE'
 }
 
- const cors_url = "https://cors-anywhere.herokuapp.com/"
+ //const cors_url = "https://cors-anywhere.herokuapp.com/"
 
-// const cors_url = "https://api.allorigins.win/raw?url="
+ const cors_url = "https://api.allorigins.win/raw?url="
 
-const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
+const BASE_URL = cors_url + 'https://jobs.github.com/positions'
 
 // const cors_url = "https://cors-anywhere.herokuapp.com/"
 
@@ -79,11 +78,19 @@ export const fetchTermJobs = (desc) => dispatch => {
         dispatch({
             type: fetchTermJobs,
             desc: desc,
-            payload: res.data
+            payload: res.data,
+            error: res.data.error
           })
       }
       
-      );
+      ).catch(err => {
+        dispatch({
+          type: fetchTermJobs,
+          desc: desc,
+          payload: [],
+          error: err
+        })
+      })
 }
 
 export const fetchGivenLocationJobs = (location) => dispatch => {
@@ -95,11 +102,19 @@ export const fetchGivenLocationJobs = (location) => dispatch => {
         dispatch({
             type: fetchGivenLocationJobs,
             payload: res.data,
-            location: location
+            location: location,
+            error: res.data.error
           })
       }
       
-      );
+      ).catch(err => {
+        dispatch({
+          type: fetchGivenLocationJobs,
+          location: location,
+          payload: [],
+          error: err
+        })
+      })
 }
 
 
@@ -116,11 +131,19 @@ export const fetchFullTimeJobs = (fullTime) => dispatch => {
         dispatch({
             type: fetchFullTimeJobs,
             fullTime: fullTime,
-            payload: res.data
+            payload: res.data,
+            error: res.data.error
           })
       }
       
-      );
+      ).catch(err => {
+        dispatch({
+          type: fetchFullTimeJobs,
+          fullTime: fullTime,
+          payload: [],
+          error: err
+        })
+      })
 }
 
 export const fetchFilterJobs = (searchTerm, location, fullTime) => dispatch => {
@@ -140,38 +163,46 @@ export const fetchFilterJobs = (searchTerm, location, fullTime) => dispatch => {
             payload: res.data,
             description: searchTerm,
             full_time: fullTime,
-            location: location
+            location: location,
+            error: res.data.error
           })
       }
       
-      );
+      ).catch(err => {
+        dispatch({
+          type: fetchFilterJobs,
+          description: searchTerm,
+          full_time: fullTime,
+          location: location,
+          payload: [],
+          error: err
+        })
+      })
 }
 
 
-export const fetchJobs = (page) => dispatch => {
+export const fetchJobs = () => dispatch => {
     const cancelToken1 = axios.CancelToken.source()
     axios.get(BASE_URL, {
         cancelToken: cancelToken1.token,
-        params: { markdown: true, page: 2 }
+        params: { markdown: true }
       })
       .then(res => {
+        console.log(res, "--response should be here--")
         dispatch({
             type: fetchJobs,
-            page: page,
-            payload: res.data
+            payload: res.data,
+            error: res.data.error
           })
       }
-      
-      );
+      ).catch(err => {
+        dispatch({
+          type: fetchJobs,
+          payload: [],
+          error: err
+        })
+      })
   };
-
-  export const setPage = (page) => dispatch => {
-     dispatch({
-      type: setPage,
-      payload: page,
-     })
-  }
-
 export const displayJobs = () => ({
     type: actionType.showJobs
 })

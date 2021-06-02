@@ -5,12 +5,13 @@ import {
   fetchGivenLocationJobs, 
   fetchFullTimeJobs, 
   fetchFilterJobs,
-  getJobDescription,
-  setPage
+  getJobDescription
 } from '../actions/jobActions'
 
 const initialState = {
     items: [],
+    error: "",
+    response: "",
     item: {},
     loading: false,
     fullTime: false,
@@ -18,42 +19,46 @@ const initialState = {
     location: "",
     latitude: "",
     longitude: "",
-
-    page: 0,
-    hasNextPage: false
 }
 
 export const jobReducer = (state=initialState, action) => {
+  console.log(action.payload,"---payload is here---")
     switch(action.type) {
       case fetchJobs:
         return {
           ...state,
-          items: action.payload
+          response: action.payload,
+          items: [],
+          error: action.error
         };
         case fetchCurrentLocationJobs: 
          return {
            ...state,
            items: action.payload,
            latitude: action.lat,
-           longitude: action.long
+           longitude: action.long,
+           error: action.error
          }
          case fetchTermJobs: 
          return {
            ...state,
            items: action.payload,
-           description: action.desc
+           description: action.desc,
+           error: action.error
          }
          case fetchGivenLocationJobs:
          return {
           ...state,
           items: action.payload,
-          location: action.location
+          location: action.location,
+          error: action.error
          }
          case fetchFullTimeJobs:
            return {
              ...state,
              items: action.payload,
-             fullTime: action.fullTime
+             fullTime: action.fullTime,
+             error: action.error
            }
            case fetchFilterJobs: 
            return {
@@ -61,18 +66,15 @@ export const jobReducer = (state=initialState, action) => {
              items: action.payload,
              description: action.description,
              fullTime: action.full_time,
-             location: action.location
+             location: action.location,
+             error: action.error
            }
            case getJobDescription: 
            return {
              ...state,
-             item: action.payload
+             item: action.payload,
+             error: action.error
            }
-           case setPage:
-             return{
-               ...state,
-               page: action.payload
-             }
        default: 
        return state
     }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import './App.css';
 import Dashboard from '../src/Containers/Dashboard/dashboard'
 import NavBar from "../src/Components/Navbar/Navbar"
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import {HashRouter as Router, Switch, Route} from "react-router-dom"
 
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';

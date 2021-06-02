@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs, setPage}  from '../../library/store/actions/jobActions';
+import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
 import { makeStyles } from '@material-ui/core/styles';
+// import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -10,6 +11,8 @@ import "./dashboard.css"
 import { Container } from 'react-bootstrap';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar"
+import createDOMPurify from 'dompurify'
+import { JSDOM } from 'jsdom'
 
 import { Pagination } from 'react-bootstrap'
 
@@ -21,6 +24,8 @@ import Search from '../../Components/Search/Search'
   let history = useHistory();
   const [mounted, setMounted] = useState(false)
  
+  const window = (new JSDOM('')).window
+  const DOMPurify = createDOMPurify(window)
 
   if(!mounted){
     // Code for componentWillMount here
@@ -30,7 +35,8 @@ import Search from '../../Components/Search/Search'
     navigator.geolocation.getCurrentPosition(function(position) {
     if(!position.coords.latitude && !position.coords.longitude){
     }else{
-       props.fetchJobs()
+      console.log(props.fetchJobs(), "---error is here---")  
+       
       // props.fetchCurrentLocationJobs(position.coords.latitude, position.coords.longitude) 
     }
     });
@@ -40,9 +46,7 @@ import Search from '../../Components/Search/Search'
     setMounted(true)
   },[])
 
-  function adjustPage(amount) {
-    setPage(prevPage => prevPage + amount)
-  }
+  
 
   const goToJob = (id) => {
     history.push(`/JobInfo/${id}`)
@@ -57,23 +61,22 @@ import Search from '../../Components/Search/Search'
     return color;
   }
   
-  const {page, hasNextPage} = props
-
   const classes = useStyles();
         return(
           <Container>
            {/* <NavBar />  */}
           <Search style={{position: "relative", zIndex: 10}} />
           <Container  style={{padding: "7%"}}>
-          <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
+          <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.fetchJobs()) }}/>
+            {/*  <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
                   <Grid item xs={12} sm={6} md={4} key={job.id}>
                       <Card onClick={() => goToJob(job.id)} className={classes.root}>
                       <CardContent>
                           <Avatar style={{backgroundColor: generateRandomColor()}} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                          {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
+                       <Typography className={classes.title} color="textSecondary" gutterBottom>
                           {user.id}
-                          </Typography> */}
+                          </Typography> 
                           <Typography noWrap  variant="h5" component="h2">
                           {job.company}
                           </Typography>
@@ -89,25 +92,16 @@ import Search from '../../Components/Search/Search'
                   </Card>
                   </Grid>
                           ))}
-          </Grid>
+          </Grid>*/}
+          <p>{props.error}</p>
       </Container>
-      <Pagination>
-      {page !== 1 && <Pagination.Prev onClick={() => adjustPage(-1)} />}
-      {page !== 1 && <Pagination.Item onClick={() => setPage(1)}>1</Pagination.Item>}
-      {page > 2 && <Pagination.Ellipsis />}
-      {page > 2 && <Pagination.Item onClick={() => adjustPage(-1)}>{page - 1}</Pagination.Item>}
-      <Pagination.Item active>{page}</Pagination.Item>
-      {hasNextPage && <Pagination.Item onClick={() => adjustPage(1)}>{page + 1}</Pagination.Item>}
-      {hasNextPage && <Pagination.Next onClick={() => adjustPage(1)} />}
-    </Pagination>
       </Container>
         )
     }
 
 const mapStateToProps = state => ({
     jobs: state.jobs.items,
-    page: state.jobs.page,
-    hasNextPage: state.jobs.hasNextPage
+    error: state.jobs.error
 })
 
 
@@ -133,7 +127,7 @@ const useStyles = makeStyles({
 
 
 export default connect(mapStateToProps, { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs,
-  fetchFilterJobs, setPage
+  fetchFilterJobs
 })(Dashboard);
 
 
