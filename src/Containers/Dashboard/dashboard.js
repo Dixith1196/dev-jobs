@@ -4,24 +4,24 @@ import { useHistory } from "react-router-dom";
 import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
 import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+// import Card from '@material-ui/core/Card';
+// import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import "./dashboard.css"
 import { Container } from 'react-bootstrap';
-import Grid from '@material-ui/core/Grid';
-import Avatar from "@material-ui/core/Avatar"
+// import Grid from '@material-ui/core/Grid';
+// import Avatar from "@material-ui/core/Avatar"
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 
-import { Pagination } from 'react-bootstrap'
+// import { Pagination } from 'react-bootstrap'
 
 import Search from '../../Components/Search/Search'
 
  function Dashboard(props) {
 
 
-  let history = useHistory();
+  // let history = useHistory();
   const [mounted, setMounted] = useState(false)
  
   const window = (new JSDOM('')).window
@@ -48,20 +48,20 @@ import Search from '../../Components/Search/Search'
 
   
 
-  const goToJob = (id) => {
-    history.push(`/JobInfo/${id}`)
-  }
+  // const goToJob = (id) => {
+  //   history.push(`/JobInfo/${id}`)
+  // }
   
-  function generateRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
+  // function generateRandomColor() {
+  //   var letters = '0123456789ABCDEF';
+  //   var color = '#';
+  //   for (var i = 0; i < 6; i++) {
+  //     color += letters[Math.floor(Math.random() * 16)];
+  //   }
+  //   return color;
+  // }
   
-  const classes = useStyles();
+  // const classes = useStyles();
         return(
           <Container>
            {/* <NavBar />  */}
