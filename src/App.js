@@ -18,7 +18,7 @@ function App(props) {
 
 
   if(!mounted){
-    if( localStorage.getItem("toggle") === true){
+    if( localStorage.getItem("toggle") == true){
       props.toggleTheme(true)
     }else{
       props.toggleTheme(false)
@@ -38,7 +38,7 @@ function App(props) {
   
   return (
 <div className="App">
-<ThemeProvider theme={localStorage.getItem("theme") === 'light' ? lightTheme : darkTheme}>
+<ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
 <GlobalStyles />
 <Router>
         <NavBar />
