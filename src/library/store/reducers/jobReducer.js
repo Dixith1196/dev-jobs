@@ -1,26 +1,26 @@
 import { 
   fetchJobs, 
-  showJobs, 
   fetchCurrentLocationJobs, 
   fetchTermJobs, 
   fetchGivenLocationJobs, 
   fetchFullTimeJobs, 
   fetchFilterJobs,
-  displayJobs,
-  getJobDescription
+  getJobDescription,
+  setPage
 } from '../actions/jobActions'
 
 const initialState = {
     items: [],
     item: {},
     loading: false,
-    page: 0,
-    prevY: 0,
     fullTime: false,
     description: "",
     location: "",
     latitude: "",
-    longitude: ""
+    longitude: "",
+
+    page: 0,
+    hasNextPage: false
 }
 
 export const jobReducer = (state=initialState, action) => {
@@ -68,6 +68,11 @@ export const jobReducer = (state=initialState, action) => {
              ...state,
              item: action.payload
            }
+           case setPage:
+             return{
+               ...state,
+               page: action.payload
+             }
        default: 
        return state
     }

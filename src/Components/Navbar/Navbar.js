@@ -3,22 +3,16 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { connect } from 'react-redux'
 import { setLightTheme, setDarkTheme, toggleTheme } from '../../library/store/actions/themeActions'
- import Search from '../Search/Search'
 import Switch from "react-switch";
-import IconButton from "@material-ui/core/IconButton";
-
-// import SearchIcon from "@material-ui/icons/Search";
-
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
-import { Container } from "@material-ui/core";
 
 function NavBar(props) {
 
   // const [mounted, setMounted] = useState(false)
  
   const handleClick = () => {
-    if(props.toggle == false){
+    if(props.toggle === false){
       props.toggleTheme(true)
       localStorage.setItem("toggle", true)
       localStorage.setItem("theme", "dark")

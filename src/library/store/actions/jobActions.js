@@ -8,12 +8,13 @@ const actionType = {
     fetchFullTimeJobs: 'FETCH_FULL_TIME_JOBS',
     fetchFilterJobs: 'FETCH_FILTER_JOBS',
     displayJobs: 'DISPLAY_JOBS',
-    getJobDescription: 'GET_JOB_DESCRIPTION'
+    getJobDescription: 'GET_JOB_DESCRIPTION',
+    setPage: 'SET_PAGE'
 }
 
-// const cors_url = "https://cors-anywhere.herokuapp.com/"
+ const cors_url = "https://cors-anywhere.herokuapp.com/"
 
-const cors_url = "https://api.allorigins.win/raw?url="
+// const cors_url = "https://api.allorigins.win/raw?url="
 
 const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
 
@@ -58,16 +59,20 @@ export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
             long: long,
             payload: res.data
           })
-      }
-      
+      }  
       );
 }
 
 export const fetchTermJobs = (desc) => dispatch => {
     const cancelToken1 = axios.CancelToken.source()
     
-    axios.get(`${BASE_URL}description=${desc}`, {
+    axios.get(BASE_URL, {
         cancelToken: cancelToken1.token,
+        
+        params: {
+          markdown: true,
+          description: desc
+        }
       })
       .then(res => {
           console.log(res, "---response is here---")
@@ -143,15 +148,16 @@ export const fetchFilterJobs = (searchTerm, location, fullTime) => dispatch => {
 }
 
 
-export const fetchJobs = () => dispatch => {
+export const fetchJobs = (page) => dispatch => {
     const cancelToken1 = axios.CancelToken.source()
     axios.get(BASE_URL, {
         cancelToken: cancelToken1.token,
-        params: { markdown: true }
+        params: { markdown: true, page: 2 }
       })
       .then(res => {
         dispatch({
             type: fetchJobs,
+            page: page,
             payload: res.data
           })
       }
@@ -159,6 +165,12 @@ export const fetchJobs = () => dispatch => {
       );
   };
 
+  export const setPage = (page) => dispatch => {
+     dispatch({
+      type: setPage,
+      payload: page,
+     })
+  }
 
 export const displayJobs = () => ({
     type: actionType.showJobs

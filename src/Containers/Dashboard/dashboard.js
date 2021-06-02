@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import PropTypes from 'prop-types';
-// import NavBar from "../../Components/Navbar/Navbar"
-import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
+import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs, setPage}  from '../../library/store/actions/jobActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import "./dashboard.css"
 import { Container } from 'react-bootstrap';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar"
+
+import { Pagination } from 'react-bootstrap'
 
 import Search from '../../Components/Search/Search'
 
@@ -34,7 +30,7 @@ import Search from '../../Components/Search/Search'
     navigator.geolocation.getCurrentPosition(function(position) {
     if(!position.coords.latitude && !position.coords.longitude){
     }else{
-       props.fetchTermJobs("Java")
+       props.fetchJobs()
       // props.fetchCurrentLocationJobs(position.coords.latitude, position.coords.longitude) 
     }
     });
@@ -43,6 +39,10 @@ import Search from '../../Components/Search/Search'
   useEffect(() =>{
     setMounted(true)
   },[])
+
+  function adjustPage(amount) {
+    setPage(prevPage => prevPage + amount)
+  }
 
   const goToJob = (id) => {
     history.push(`/JobInfo/${id}`)
@@ -57,6 +57,8 @@ import Search from '../../Components/Search/Search'
     return color;
   }
   
+  const {page, hasNextPage} = props
+
   const classes = useStyles();
         return(
           <Container>
@@ -89,12 +91,23 @@ import Search from '../../Components/Search/Search'
                           ))}
           </Grid>
       </Container>
+      <Pagination>
+      {page !== 1 && <Pagination.Prev onClick={() => adjustPage(-1)} />}
+      {page !== 1 && <Pagination.Item onClick={() => setPage(1)}>1</Pagination.Item>}
+      {page > 2 && <Pagination.Ellipsis />}
+      {page > 2 && <Pagination.Item onClick={() => adjustPage(-1)}>{page - 1}</Pagination.Item>}
+      <Pagination.Item active>{page}</Pagination.Item>
+      {hasNextPage && <Pagination.Item onClick={() => adjustPage(1)}>{page + 1}</Pagination.Item>}
+      {hasNextPage && <Pagination.Next onClick={() => adjustPage(1)} />}
+    </Pagination>
       </Container>
         )
     }
 
 const mapStateToProps = state => ({
-    jobs: state.jobs.items
+    jobs: state.jobs.items,
+    page: state.jobs.page,
+    hasNextPage: state.jobs.hasNextPage
 })
 
 
@@ -115,15 +128,12 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
-  },
-  root: {
-      // flexGrow: 1,
-    },
+  }
 });
 
 
 export default connect(mapStateToProps, { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs,
-  fetchFilterJobs
+  fetchFilterJobs, setPage
 })(Dashboard);
 
 

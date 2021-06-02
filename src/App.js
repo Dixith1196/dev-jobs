@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {setLightTheme, setDarkTheme, toggleTheme} from '../src/library/store/actions/themeActions'
 import { connect } from 'react-redux'
-import logo from './logo.svg';
 import './App.css';
 import Dashboard from '../src/Containers/Dashboard/dashboard'
-import * as ReactBootStrap from "react-bootstrap";
 import NavBar from "../src/Components/Navbar/Navbar"
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
@@ -20,7 +18,7 @@ function App(props) {
 
 
   if(!mounted){
-    if( localStorage.getItem("toggle") == true){
+    if( localStorage.getItem("toggle") === true){
       props.toggleTheme(true)
     }else{
       props.toggleTheme(false)

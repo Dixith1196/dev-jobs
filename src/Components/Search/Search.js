@@ -4,7 +4,6 @@ import './Search.css'
 import { connect } from 'react-redux'
 import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
 import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
 import Input from "@material-ui/core/Input"
 import SearchIcon from "@material-ui/icons/Search";
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -33,20 +32,20 @@ import Button from "@material-ui/core/Button"
 
     const filterResults = () => {
       console.log("filter results")
-      if(query != "" && location == "" && checked == false){
+      if(query !== "" && location ==="" && checked === false){
         props.fetchTermJobs(query)
-      }else if(query == "" && location != "" && checked == false){
+      }else if(query === "" && location !== "" && checked === false){
         props.fetchGivenLocationJobs(location)
-      }else if(query == "" && location == "" && checked == true){
+      }else if(query === "" && location === "" && checked === true){
         props.fetchFullTimeJobs(checked)
-      }else if(query != "" && location != ""){
+      }else if(query !== "" && location !== ""){
         props.fetchFilterJobs(query, location, false)
-      }else if(location != "" && checked == true){
+      }else if(location !== "" && checked === true){
         props.fetchFilterJobs("", location, checked)
-      }else if(query != "" && checked == true){
+      }else if(query !== "" && checked === true){
         props.fetchFilterJobs(query,"", checked)
       }
-      else if(query != "" && location != "" && checked == true){
+      else if(query !== "" && location !== "" && checked === true){
         props.fetchFilterJobs(query, location, checked)
       }else{
         props.fetchCurrentLocationJobs(props.latitude, props.longitude) 
