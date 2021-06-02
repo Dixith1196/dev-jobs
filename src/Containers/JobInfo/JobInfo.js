@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
+import { getJobDescription }  from '../../library/store/actions/jobActions';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -31,6 +31,10 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import CardActions from '@material-ui/core/CardActions';
 import ExploreIcon from '@material-ui/icons/Explore';
+
+import { useParams } from "react-router";
+
+
 const useStyles = makeStyles((theme) => ({
     // root: {
     //   maxWidth: 345,
@@ -55,18 +59,37 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function JobInfo() {
+function JobInfo(props) {
     // const classes = useStyles();
     const classes = useStyles();
+
     // const theme = useTheme();
     const [expanded, setExpanded] = React.useState(false);
+
+    const [mounted, setMounted] = useState(false)
+
+    let { id } = useParams();
+
+    if(!mounted){
+      // Code for componentWillMount here
+      // This code is called only one time before intial render
+      props.getJobDescription(id)
+    }   
+  
+
+    useEffect(() =>{
+      setMounted(true)
+    },[])
+  
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
+
+    const jd = props.jobDescription
+
     return (
         <Container style={{paddingLeft:"20%", paddingRight:"20%"}}>
-            
         <Card className="root">
             <div className="logo-part">
                 <Typography component="h5" variant="h5" className="topo1">
@@ -80,15 +103,15 @@ export default function JobInfo() {
       }}>
         <CardContent className="content">
           <Typography component="h5" variant="h5">
-            So Digital lnc.
+           {jd.company}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            sodigital.co
+           {jd.company_url}
           </Typography>
         </CardContent>
       </div>
       <div className="site-button" >
-      <Button  className="search-button" variant="contained" color="none" style={{fontWeight: "bolder", margin:"30px"}}>
+      <Button href={jd.company_url}  className="search-button" variant="contained" color="none" style={{fontWeight: "bolder", margin:"30px"}}>
         Company site
     </Button>
       </div>
@@ -103,30 +126,16 @@ export default function JobInfo() {
         //   </Avatar>
         // }
         action={
-            <Button  className="search-button" variant="contained" color="primary" style={{fontWeight: "bolder", margin:"30px"}}>
+            <Button href={jd.company_url}  className="search-button" variant="contained" color="primary" style={{fontWeight: "bolder", margin:"30px"}}>
             Company site
         </Button>
         }
-        title="Senior Software Engineer"
-        subheader="Remote, Seoul, Tokyo, Mountain View, San Fransisco"
+        title={jd.title}
+        subheader={jd.location}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking 
-      at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
-       opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing 
-       packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum'
-        will uncover many web sites still in their infancy. Various versions have evolved over the years, 
-      sometimes by accident, sometimes on purpose (injected humour and the like).There are many variations of 
-      passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
-      <br />
-      By injected humour, 
-      or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum,
-       you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum 
-       generators on the Internet tend to repeat predefined chunks as necessary, making this the first true 
-       generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model 
-       sentence structures, to generate Lorem Ipsum which looks
-      generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+     {jd.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -182,23 +191,15 @@ export default function JobInfo() {
     </div>
 {/* ===================================== */}
 <div style={{marginBottom:"20px", backgroundColor:"#8b26c5"}}>
-<Card className={classes.root} style={{backgroundColor: "#8b26c5", color:"white"}}>
+<Card className={classes.root} style={{backgroundColor: "#8b26c5"}}>
       <CardHeader
         title="How to Apply"
       />
       <CardContent>
         <Typography variant="body2" color="white" component="p">
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking 
-      at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
-       opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing 
-       packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum'
-        will uncover many web sites still in their infancy. Various versions have evolved over the years, 
-      sometimes by accident, sometimes on purpose (injected humour and the like).There are many variations of 
-      passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
+       {jd.how_to_apply}
         </Typography>
       </CardContent>
-      
-      
     </Card>
     </div>
     <Footer/>
@@ -206,3 +207,12 @@ export default function JobInfo() {
     
     )
 }
+
+const mapStateToProps = state => ({
+   jobDescription: state.jobs.item
+})
+
+export default connect(mapStateToProps, { getJobDescription
+})(JobInfo);
+
+

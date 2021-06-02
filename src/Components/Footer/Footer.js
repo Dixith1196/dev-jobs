@@ -17,7 +17,7 @@ class Footer extends Component {
   render() {
     return (
       <FooterContainer>
-        <div style={{display: "flex", justifyContent:"flex-start"}}>
+        <div style={{display: "flex", justifyContent:"space-between"}}>
         <div>
         <Typography component="h5" variant="h5">
             So Digital lnc.

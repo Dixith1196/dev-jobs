@@ -28,7 +28,7 @@ function App(props) {
         <NavBar />
         <Switch>
               <Route exact path='/' component={Dashboard} />
-              <Route exact path='/JobInfo' component={JobInfo} />
+              <Route exact path='/JobInfo/:id' component={JobInfo} />
           </Switch>
       </Router>
       </ThemeProvider>

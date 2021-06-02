@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,6 +20,8 @@ import Search from '../../Components/Search/Search'
 
  function Dashboard(props) {
 
+
+  let history = useHistory();
   const [mounted, setMounted] = useState(false)
  
 
@@ -38,12 +41,15 @@ import Search from '../../Components/Search/Search'
       // props.fetchCurrentLocationJobs(position.coords.latitude, position.coords.longitude) 
     }
     });
-
   }
 
   useEffect(() =>{
     setMounted(true)
   },[])
+
+  const goToJob = (id) => {
+    history.push(`/JobInfo/${id}`)
+  }
   
   function generateRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -53,6 +59,7 @@ import Search from '../../Components/Search/Search'
     }
     return color;
   }
+  
   const classes = useStyles();
         return(
           <Container>
@@ -61,7 +68,7 @@ import Search from '../../Components/Search/Search'
           <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
                   <Grid item xs={12} sm={6} md={4} key={props.jobs.id}>
-                      <Card className={classes.root}>
+                      <Card onClick={() => goToJob(job.id)} className={classes.root}>
                       <CardContent>
                           <Avatar style={{backgroundColor: generateRandomColor()}} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                           {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -81,7 +88,7 @@ import Search from '../../Components/Search/Search'
                       </CardContent>
                   </Card>
                   </Grid>
-                          ))};
+                          ))}
           </Grid>
       </Container>
       </Container>

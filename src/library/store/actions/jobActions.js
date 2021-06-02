@@ -7,12 +7,36 @@ const actionType = {
     fetchGivenLocationJobs: 'FETCH_GIVEN_LOCATION_JOBS',
     fetchFullTimeJobs: 'FETCH_FULL_TIME_JOBS',
     fetchFilterJobs: 'FETCH_FILTER_JOBS',
-    displayJobs: 'DISPLAY_JOBS'
+    displayJobs: 'DISPLAY_JOBS',
+    getJobDescription: 'GET_JOB_DESCRIPTION'
 }
 
-const cors_url = "https://cors-anywhere.herokuapp.com/"
+// const cors_url = "https://cors-anywhere.herokuapp.com/"
 
-const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
+const cors_url = "https://api.allorigins.win/raw?url="
+
+const BASE_URL = cors_url + `https://jobs.github.com/positions.json`
+
+
+export const getJobDescription = (jobId) => dispatch => {
+    console.log(jobId,"---job desc is called---")
+    const JOB_BASE_URL = cors_url + `https://jobs.github.com/positions/${jobId}.json`
+    const cancelToken1 = axios.CancelToken.source()
+    axios.get(JOB_BASE_URL, {
+        cancelToken: cancelToken1.token,
+        params: {
+            markdown: true
+     },   
+    })
+      .then(res => {
+          console.log(res,"--job desc res is here--")
+        dispatch({
+            type: getJobDescription,
+            payload: res.data
+          })
+      }
+      );
+}
 
 export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
     console.log("---current location is called---")
@@ -40,7 +64,6 @@ export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
 
 export const fetchTermJobs = (desc) => dispatch => {
     console.log("---current term is called---")
-    console.log("job action called---")
     const cancelToken1 = axios.CancelToken.source()
     axios.get(BASE_URL, {
         cancelToken: cancelToken1.token,

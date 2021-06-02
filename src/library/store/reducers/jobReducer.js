@@ -6,7 +6,9 @@ import {
   fetchGivenLocationJobs, 
   fetchFullTimeJobs, 
   fetchFilterJobs,
-  displayJobs } from '../actions/jobActions'
+  displayJobs,
+  getJobDescription
+} from '../actions/jobActions'
 
 const initialState = {
     items: [],
@@ -57,6 +59,11 @@ export const jobReducer = (state=initialState, action) => {
              description: action.description,
              fullTime: action.full_time,
              location: action.location
+           }
+           case getJobDescription: 
+           return {
+             ...state,
+             item: action.payload
            }
        default: 
        return state
