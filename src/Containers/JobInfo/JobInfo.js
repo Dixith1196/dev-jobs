@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import "./JobInfo.css"
 import { Container } from 'react-bootstrap';
 import Button from "@material-ui/core/Button"
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Footer from "../../Components/Footer/Footer"
 import { red } from '@material-ui/core/colors';
 import CardContent from '@material-ui/core/CardContent';
@@ -70,9 +70,9 @@ function JobInfo(props) {
     },[])
   
 
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
-    };
+    // const handleExpandClick = () => {
+    //   setExpanded(!expanded);
+    // };
 
     const jd = props.jobDescription
 
