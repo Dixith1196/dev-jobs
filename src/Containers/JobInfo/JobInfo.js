@@ -49,7 +49,7 @@ function JobInfo(props) {
     const classes = useStyles();
 
     // const theme = useTheme();
-    const [expanded, setExpanded] = React.useState(false);
+    // const [expanded, setExpanded] = React.useState(false);
 
     const [mounted, setMounted] = useState(false)
 

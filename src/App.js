@@ -38,7 +38,7 @@ function App(props) {
   
   return (
 <div className="App">
-<ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
+<ThemeProvider theme={localStorage.getItem("theme") === 'light' ? lightTheme : darkTheme}>
 <GlobalStyles />
 <Router>
         <NavBar />
