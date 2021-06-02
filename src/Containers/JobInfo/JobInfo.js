@@ -93,13 +93,13 @@ function JobInfo(props) {
           <Typography component="h5" variant="h5">
            {jd.company}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary" >
+          <Typography variant="subtitle1" >
            {jd.company_url}
           </Typography>
         </CardContent>
       </div>
       <div className="site-button" >
-      <Button href={jd.company_url}  className="search-button" variant="contained" color="none" style={{fontWeight: "bolder", margin:"30px"}}>
+      <Button href={jd.company_url}  className="search-button" variant="contained"  style={{fontWeight: "bolder", margin:"30px"}}>
         Company site
     </Button>
       </div>
@@ -114,7 +114,7 @@ function JobInfo(props) {
         //   </Avatar>
         // }
         action={
-            <Button href={jd.company_url}  className="search-button" variant="contained" color="primary" style={{fontWeight: "bolder", margin:"30px"}}>
+            <Button href={jd.company_url}  className="search-button" variant="contained"  style={{fontWeight: "bolder", margin:"30px"}}>
             Company site
         </Button>
         }
@@ -122,7 +122,7 @@ function JobInfo(props) {
         subheader={jd.location}
       />
       <CardContent >
-        <Typography  variant="body2" color="textSecondary" component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.description) }}>
+        <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.description) }}>
      {/* {jd.description} */}
         </Typography>
       </CardContent>
@@ -135,7 +135,7 @@ function JobInfo(props) {
         title="How to Apply"
       />
       <CardContent>
-        <Typography variant="body2" color="white" component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.how_to_apply) }}>
+        <Typography variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.how_to_apply) }}>
         </Typography>
       </CardContent>
     </Card>

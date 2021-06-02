@@ -67,20 +67,20 @@ import Search from '../../Components/Search/Search'
           <Container  style={{padding: "7%"}}>
           <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
-                  <Grid item xs={12} sm={6} md={4} key={props.jobs.id}>
+                  <Grid item xs={12} sm={6} md={4} key={job.id}>
                       <Card onClick={() => goToJob(job.id)} className={classes.root}>
                       <CardContent>
                           <Avatar style={{backgroundColor: generateRandomColor()}} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                           {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
                           {user.id}
                           </Typography> */}
-                          <Typography noWrap numberOfLines={1} ellipsizeMode='tail' variant="h5" component="h2">
+                          <Typography noWrap  variant="h5" component="h2">
                           {job.company}
                           </Typography>
-                          <Typography noWrap  numberOfLines={1} ellipsizeMode='tail' className={classes.pos} color="textSecondary">
+                          <Typography noWrap    className={classes.pos} color="textSecondary">
                           {job.location}
                           </Typography>
-                          <Typography noWrap numberOfLines={1}  variant="body2" component="p">
+                          <Typography noWrap   variant="body2" component="p">
                           {job.type}
                           <br />
                           {'"a benevolent smile"'}
