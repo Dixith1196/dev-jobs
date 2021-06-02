@@ -11,8 +11,8 @@ import "./dashboard.css"
 // import { Container } from 'react-bootstrap';
 // import Grid from '@material-ui/core/Grid';
 // import Avatar from "@material-ui/core/Avatar"
-import createDOMPurify from 'dompurify'
-import { JSDOM } from 'jsdom'
+// import createDOMPurify from 'dompurify'
+// import { JSDOM } from 'jsdom'
 
 // import { Pagination } from 'react-bootstrap'
 
@@ -24,8 +24,8 @@ import Search from '../../Components/Search/Search'
   // let history = useHistory();
   const [mounted, setMounted] = useState(false)
  
-  const window = (new JSDOM('')).window
-  const DOMPurify = createDOMPurify(window)
+  // const window = (new JSDOM('')).window
+  // const DOMPurify = createDOMPurify(window)
 
   if(!mounted){
     // Code for componentWillMount here
@@ -67,7 +67,7 @@ import Search from '../../Components/Search/Search'
            {/* <NavBar />  */}
           <Search style={{position: "relative", zIndex: 10}} />
           <div  style={{padding: "7%"}}>
-          <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.fetchJobs()) }}/>
+          {/* <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.fetchJobs()) }}/> */}
             {/*  <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
                   <Grid item xs={12} sm={6} md={4} key={job.id}>

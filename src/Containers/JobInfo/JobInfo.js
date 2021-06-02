@@ -14,8 +14,8 @@ import Footer from "../../Components/Footer/Footer"
 import { red } from '@material-ui/core/colors';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import createDOMPurify from 'dompurify'
-import { JSDOM } from 'jsdom'
+// import createDOMPurify from 'dompurify'
+// import { JSDOM } from 'jsdom'
 
 import { useParams } from "react-router";
 
@@ -55,8 +55,8 @@ function JobInfo(props) {
 
     let { id } = useParams();
 
-    const window = (new JSDOM('')).window
-    const DOMPurify = createDOMPurify(window)
+    // const window = (new JSDOM('')).window
+    // const DOMPurify = createDOMPurify(window)
 
     if(!mounted){
       // Code for componentWillMount here
@@ -122,9 +122,9 @@ function JobInfo(props) {
         subheader={jd.location}
       />
       <CardContent >
-        <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.description) }}>
-     {/* {jd.description} */}
-        </Typography>
+        {/* <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.description) }}>
+      {jd.description} 
+        </Typography> */}
       </CardContent>
     </Card>
     </div>
@@ -135,8 +135,8 @@ function JobInfo(props) {
         title="How to Apply"
       />
       <CardContent>
-        <Typography variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.how_to_apply) }}>
-        </Typography>
+      {/*    <Typography variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.how_to_apply) }}>
+        </Typography>*/}
       </CardContent>
     </Card>
     </div>
