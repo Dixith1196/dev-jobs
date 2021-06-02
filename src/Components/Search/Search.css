@@ -11,15 +11,16 @@
     z-index : 1;
     position: relative;
 }
+
 .TextField-filter{
-  width: 480px;
+  width: 35%;
   height: 50px;
   background-color: white;
   fill: white;
   padding-left: 15px;
 }
 .TextField-loc{
-  width: 400px;
+  width: 35%;
   height: 50px;
   border: black 5px;
   padding-left: 15px;

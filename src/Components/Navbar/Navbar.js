@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { connect } from 'react-redux'
-import { setLightTheme, setDarkTheme } from '../../library/store/actions/themeActions'
+import { setLightTheme, setDarkTheme, toggleTheme } from '../../library/store/actions/themeActions'
  import Search from '../Search/Search'
 import Switch from "react-switch";
 import IconButton from "@material-ui/core/IconButton";
@@ -17,10 +17,38 @@ function NavBar(props) {
  
   const [toggle, setToggle]=useState(false);
 
-  console.log(props.toggle,"---toggle is here")
+  const [mounted, setMounted] = useState(false)
+
+
+  // if(!mounted){
+  //   // Code for componentWillMount here
+  //   // This code is called only one time before intial render
+  //   if(props.toggle == false){
+  //     setToggle(false)
+  //   }else{
+  //     setToggle(true)
+  //   }
+   
+  // }
+
+  useEffect(() =>{
+    setMounted(true)
+  },[])
+
+
+  console.log(props,"---toggle is here1")
 
   const handleClick = () => {
-    setToggle(!toggle);
+   
+    // setToggle(!toggle);
+    if(props.toggle == false){
+      props.toggleTheme(true)
+      props.setDarkTheme()
+    }else{
+      props.toggleTheme(false)
+      props.setLightTheme()
+    }
+    console.log(props,"---toggle is here2")
   }
 
   React.useEffect(() => {
@@ -44,7 +72,7 @@ function NavBar(props) {
           </div>
           
           <Switch
-            checked={toggle}
+            checked={props.toggle}
             onChange={handleClick}
             onColor="#86d3ff"
             onHandleColor="#2693e6"
@@ -72,4 +100,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {setLightTheme, setDarkTheme})(NavBar);
+export default connect(mapStateToProps, {setLightTheme, setDarkTheme, toggleTheme})(NavBar);

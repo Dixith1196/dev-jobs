@@ -43,6 +43,8 @@ import Search from '../../Components/Search/Search'
     });
   }
 
+  console.log(props.jobs, "--jobs come up here--")
+
   useEffect(() =>{
     setMounted(true)
   },[])

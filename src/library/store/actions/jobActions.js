@@ -22,6 +22,7 @@ export const getJobDescription = (jobId) => dispatch => {
     console.log(jobId,"---job desc is called---")
     const JOB_BASE_URL = cors_url + `https://jobs.github.com/positions/${jobId}.json`
     const cancelToken1 = axios.CancelToken.source()
+
     axios.get(JOB_BASE_URL, {
         cancelToken: cancelToken1.token,
         params: {
@@ -65,6 +66,7 @@ export const fetchCurrentLocationJobs = (lat, long) => dispatch => {
 export const fetchTermJobs = (desc) => dispatch => {
     console.log("---current term is called---")
     const cancelToken1 = axios.CancelToken.source()
+    
     axios.get(BASE_URL, {
         cancelToken: cancelToken1.token,
         params: { 

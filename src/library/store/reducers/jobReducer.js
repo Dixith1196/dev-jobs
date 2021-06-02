@@ -13,6 +13,9 @@ import {
 const initialState = {
     items: [],
     item: {},
+    loading: false,
+    page: 0,
+    prevY: 0,
     fullTime: false,
     description: "",
     location: "",

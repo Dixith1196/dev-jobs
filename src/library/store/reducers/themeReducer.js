@@ -1,4 +1,4 @@
-import { setLightTheme, setDarkTheme } from '../actions/themeActions'
+import { setLightTheme, setDarkTheme, toggleTheme } from '../actions/themeActions'
 
 const initialState = {
     theme: "light",
@@ -11,17 +11,23 @@ export const themeReducer = (state=initialState, action) => {
         console.log("sets light in reducer----")
         return {
             ...state,
-            theme: "light"
+            theme: action.payload
         }
         case setDarkTheme: 
         console.log("sets dark in reducer----")
         return {
             ...state,
-            theme: "dark"
+            theme: action.payload
+        }
+        case toggleTheme:
+        return {
+            ...state,
+            toggle: action.payload
         }
         default: 
         return{
-            theme: "light"
+            theme: "light",
+            toggle: false
         }
     }
 }

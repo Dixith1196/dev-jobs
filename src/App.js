@@ -16,10 +16,6 @@ import JobInfo from "./Containers/JobInfo/JobInfo"
 
 function App(props) {
 
-  // const theme = {
-  //   theme: theme
-  // }
-//console.log(theme,"--theme is here--")
   return (
 <div className="App">
 <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
