@@ -8,7 +8,7 @@ import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJ
 // import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import "./dashboard.css"
-import { Container } from 'react-bootstrap';
+// import { Container } from 'react-bootstrap';
 // import Grid from '@material-ui/core/Grid';
 // import Avatar from "@material-ui/core/Avatar"
 import createDOMPurify from 'dompurify'
@@ -63,10 +63,10 @@ import Search from '../../Components/Search/Search'
   
   // const classes = useStyles();
         return(
-          <Container>
+          <div>
            {/* <NavBar />  */}
           <Search style={{position: "relative", zIndex: 10}} />
-          <Container  style={{padding: "7%"}}>
+          <div  style={{padding: "7%"}}>
           <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.fetchJobs()) }}/>
             {/*  <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
@@ -94,8 +94,8 @@ import Search from '../../Components/Search/Search'
                           ))}
           </Grid>*/}
           <p>{props.error}</p>
-      </Container>
-      </Container>
+      </div>
+      </div>
         )
     }
 
