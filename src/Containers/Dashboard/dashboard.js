@@ -16,13 +16,13 @@ import Pagination from '@material-ui/lab/Pagination';
  
   if(!mounted){
      props.setLoader() 
-     props.fetchJobs(1)
+   
   
     navigator.geolocation.getCurrentPosition(function(position) {
     if(!position.coords.latitude && !position.coords.longitude){
+      props.fetchJobs(1)
     }else{
-      // console.log(props.fetchJobs(), "---error is here---")  
-      // props.fetchCurrentLocationJobs(position.coords.latitude, position.coords.longitude) 
+      props.fetchCurrentLocationJobs(position.coords.latitude, position.coords.longitude, 1) 
     }
     });
   }

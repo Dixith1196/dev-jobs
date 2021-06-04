@@ -24,10 +24,7 @@ export const setLoader = () => dispatch => {
 
 export const getJobDescription = (jobId) => dispatch => {
     const JOB_BASE_URL = cors_url + `https://jobs.github.com/positions/${jobId}.json`
-    const cancelToken1 = axios.CancelToken.source()
-
     axios.get(JOB_BASE_URL, {
-        cancelToken: cancelToken1.token,
         params: {
             markdown: true
      },   
@@ -42,10 +39,7 @@ export const getJobDescription = (jobId) => dispatch => {
 }
 
 export const fetchCurrentLocationJobs = (lat, long, page) => dispatch => {
-    const cancelToken1 = axios.CancelToken.source()
-    axios.get(`${BASE_URL}lat=${lat}&long=${long}&page=${page}`, {
-        cancelToken: cancelToken1.token,
-      })
+    axios.get(`${BASE_URL}lat=${lat}&long=${long}&page=${page}`)
       .then(res => {
         if(res.data.length > 49){
           dispatch({
@@ -70,11 +64,7 @@ export const fetchCurrentLocationJobs = (lat, long, page) => dispatch => {
 }
 
 export const fetchTermJobs = (desc, page) => dispatch => {
-    const cancelToken1 = axios.CancelToken.source()
-    
-    axios.get(`${BASE_URL}description=${desc}&page=${page}`, {
-        cancelToken: cancelToken1.token,
-      })
+    axios.get(`${BASE_URL}description=${desc}&page=${page}`)
       .then(res => {
           if(res.data.length > 49){
             dispatch({
@@ -107,10 +97,7 @@ export const fetchTermJobs = (desc, page) => dispatch => {
 }
 
 export const fetchGivenLocationJobs = (location, page) => dispatch => {
-    const cancelToken1 = axios.CancelToken.source()
-    axios.get(`${BASE_URL}location=${location}&page=${page}`, {
-        cancelToken: cancelToken1.token,
-      })
+    axios.get(`${BASE_URL}location=${location}&page=${page}`)
       .then(res => {
         if(res.data.length > 49){
         dispatch({
@@ -141,10 +128,7 @@ export const fetchGivenLocationJobs = (location, page) => dispatch => {
 
 
 export const fetchFullTimeJobs = (fullTime, page) => dispatch => {
-    const cancelToken1 = axios.CancelToken.source()
-    axios.get(`${BASE_URL}full_time=${fullTime}&page=${page}`, {
-        cancelToken: cancelToken1.token,
-      })
+    axios.get(`${BASE_URL}full_time=${fullTime}&page=${page}`)
       .then(res => {
         if(res.data.length > 49){
         dispatch({
@@ -176,16 +160,7 @@ export const fetchFullTimeJobs = (fullTime, page) => dispatch => {
 }
 
 export const fetchFilterJobs = (searchTerm, location, fullTime, page) => dispatch => {
-    const cancelToken1 = axios.CancelToken.source()
-    axios.get(`${BASE_URL}description=${searchTerm}&location=${location}&full_time=${fullTime}&page=${page}`, {
-        cancelToken: cancelToken1.token,
-        params: { 
-            markdown: true,
-            description: searchTerm,
-            full_time: fullTime,
-            location: location
-         }
-      })
+    axios.get(`${BASE_URL}description=${searchTerm}&location=${location}&full_time=${fullTime}&page=${page}`)
       .then(res => {
         if(res.data.length > 49){
         dispatch({
@@ -224,11 +199,7 @@ export const fetchFilterJobs = (searchTerm, location, fullTime, page) => dispatc
 
 
 export const fetchJobs = (page) => dispatch => {
-    const cancelToken1 = axios.CancelToken.source()
-    axios.get(`${BASE_URL}page=${page}`, {
-        cancelToken: cancelToken1.token,
-        params: { markdown: true }
-      })
+    axios.get(`${BASE_URL}page=${page}`)
       .then(res => {
         if(res.data.length > 49){
           dispatch({
