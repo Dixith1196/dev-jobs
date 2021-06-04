@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react'
 import NavBar from '../../Components/Navbar/Navbar'
 import { connect } from 'react-redux'
 
-import { Card, Button, Typography, CardContent, CardHeader, CircularProgress } from '@material-ui/core'
+import { Card, Button, Typography, CardContent, CardHeader, CircularProgress,  } from '@material-ui/core'
 
 import { getJobDescription }  from '../../library/store/actions/jobActions';
 
@@ -46,7 +46,7 @@ function JobInfo(props) {
     const classes = useStyles();
 
     // const theme = useTheme();
-    // const [expanded, setExpanded] = React.useState(false);
+    
 
     const [mounted, setMounted] = useState(false)
 
@@ -67,9 +67,7 @@ function JobInfo(props) {
     },[])
   
 
-    // const handleExpandClick = () => {
-    //   setExpanded(!expanded);
-    // };
+
 
     const jd = props.jobDescription
 
@@ -121,8 +119,8 @@ function JobInfo(props) {
         subheader={jd.location}
       />
       <CardContent >
-         <Typography  variant="body2"  component="p">
-      {jd.description} 
+         <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{__html: jd.description}}>
+      {/* {jd.description}  */}
         </Typography> 
       </CardContent>
     </Card>
@@ -133,7 +131,7 @@ function JobInfo(props) {
         title="How to Apply"
       />
       <CardContent>
-          <Typography variant="body2"  component="p">{jd.how_to_apply}
+          <Typography variant="body2"  component="p" dangerouslySetInnerHTML={{__html: jd.how_to_apply}}>
         </Typography>
       </CardContent>
     </Card>
