@@ -18,7 +18,7 @@ export const themeReducer = (state=initialState, action) => {
             theme: action.payload
         }
         case toggleTheme:
-        if(localStorage.getItem("toggle") === false){
+        if(action.payload === false){
             return {
                 ...state,
                 theme: "light",

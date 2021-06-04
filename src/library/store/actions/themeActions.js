@@ -1,6 +1,7 @@
 
 
 export const toggleTheme = (tog) => dispatch => {
+
     dispatch({
         type: toggleTheme,
         payload: tog

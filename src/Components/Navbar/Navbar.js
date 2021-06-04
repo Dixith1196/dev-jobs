@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { connect } from 'react-redux'
@@ -9,37 +9,14 @@ import Brightness3Icon from '@material-ui/icons/Brightness3';
 
 function NavBar(props) {
 
-  // const [mounted, setMounted] = useState(false)
  
   const handleClick = () => {
     if(props.toggle === false){
       props.toggleTheme(true)
-      localStorage.setItem("toggle", true)
-      localStorage.setItem("theme", "dark")
     }else{
       props.toggleTheme(false)
-      localStorage.setItem("toggle", false)
-      localStorage.setItem("theme", "light")
     }
   }
-
-  // if(!mounted){
-  //   if( localStorage.getItem("toggle") == true){
-  //     props.toggleTheme(true)
-  //   }else{
-  //     props.toggleTheme(false)
-  //   }
-  // }
-
-  // useEffect(() =>{
-  //   // setMounted(true)
-  //   console.log("--use effect calls--")
-  //   if( localStorage.getItem("toggle") == true){
-  //     props.toggleTheme(true)
-  //   }else{
-  //     props.toggleTheme(false)
-  //   }
-  // },[])
 
   return (
     <>
@@ -52,7 +29,6 @@ function NavBar(props) {
           <div style={{paddingRight:"10px"}}>
           <WbSunnyIcon style={{ color: "white"}}/>
           </div>
-          
           <Switch
             checked={props.toggle}
             onChange={handleClick}

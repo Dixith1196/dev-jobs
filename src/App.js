@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React  from 'react';
 import {setLightTheme, setDarkTheme, toggleTheme} from '../src/library/store/actions/themeActions'
 import { connect } from 'react-redux'
 import './App.css';
@@ -14,34 +14,12 @@ import JobInfo from "./Containers/JobInfo/JobInfo"
 
 function App(props) {
 
-   const [mounted, setMounted] = useState(false)
-
-
-  if(!mounted){
-    if( localStorage.getItem("toggle") === true){
-      props.toggleTheme(true)
-    }else{
-      props.toggleTheme(false)
-    }
-  }
-
-  useEffect(() =>{
-     setMounted(true)
-  },[])
-
-
-  // if( localStorage.getItem("toggle") == false){
-  //   props.toggleTheme(true)
-  // }else{
-  //   props.toggleTheme(false)
-  // }
-  
   return (
 <div className="App">
 <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
 <GlobalStyles />
 <Router>
-        <NavBar />
+        {/* <NavBar /> */}
         <Switch>
               <Route exact path='/' component={Dashboard} />
               <Route exact path='/JobInfo/:id' component={JobInfo} />

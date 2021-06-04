@@ -1,21 +1,18 @@
 import React, { useEffect, useState} from 'react'
-
+import NavBar from '../../Components/Navbar/Navbar'
 import { connect } from 'react-redux'
+
+import { Card, Button, Typography, CardContent, CardHeader, CircularProgress } from '@material-ui/core'
 
 import { getJobDescription }  from '../../library/store/actions/jobActions';
 
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
+import { red } from '@material-ui/core/colors';
+
 import "./JobInfo.css"
-// import { Container } from 'react-bootstrap';
-import Button from "@material-ui/core/Button"
+
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from "../../Components/Footer/Footer"
-import { red } from '@material-ui/core/colors';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
-// import createDOMPurify from 'dompurify'
-// import { JSDOM } from 'jsdom'
+
 
 import { useParams } from "react-router";
 
@@ -77,6 +74,9 @@ function JobInfo(props) {
     const jd = props.jobDescription
 
     return (
+      <div>
+        <NavBar />
+        {props.loading && <CircularProgress style={{display: "flex", margin: "0 auto"}} />}
         <div style={{paddingLeft:"20%", paddingRight:"20%"}}>
         <Card className="root">
             <div className="logo-part">
@@ -104,7 +104,6 @@ function JobInfo(props) {
     </Button>
       </div>
     </Card>
-{/* ============================== */}
     <div style={{marginBottom:"20px"}}>
     <Card className={classes.root}>
       <CardHeader
@@ -122,27 +121,26 @@ function JobInfo(props) {
         subheader={jd.location}
       />
       <CardContent >
-        {/* <Typography  variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.description) }}>
+         <Typography  variant="body2"  component="p">
       {jd.description} 
-        </Typography> */}
+        </Typography> 
       </CardContent>
     </Card>
     </div>
-{/* ===================================== */}
 <div style={{marginBottom:"20px", backgroundColor:"#8b26c5"}}>
 <Card className={classes.root} style={{backgroundColor: "#8b26c5"}}>
       <CardHeader
         title="How to Apply"
       />
       <CardContent>
-      {/*    <Typography variant="body2"  component="p" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(jd.how_to_apply) }}>
-        </Typography>*/}
+          <Typography variant="body2"  component="p">{jd.how_to_apply}
+        </Typography>
       </CardContent>
     </Card>
     </div>
     <Footer/>
     </div>
-    
+    </div>
     )
 }
 

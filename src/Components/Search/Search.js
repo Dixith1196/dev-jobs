@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Search.css'
 
 import { connect } from 'react-redux'
-import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs}  from '../../library/store/actions/jobActions';
+import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs, getCurrentPage}  from '../../library/store/actions/jobActions';
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Input from "@material-ui/core/Input"
 import SearchIcon from "@material-ui/icons/Search";
@@ -33,22 +33,24 @@ import Button from "@material-ui/core/Button"
     const filterResults = () => {
       console.log("filter results")
       if(query !== "" && location ==="" && checked === false){
-        props.fetchTermJobs(query)
+        props.fetchTermJobs(query, 1)
       }else if(query === "" && location !== "" && checked === false){
-        props.fetchGivenLocationJobs(location)
+        props.fetchGivenLocationJobs(location, 1)
       }else if(query === "" && location === "" && checked === true){
-        props.fetchFullTimeJobs(checked)
+        props.fetchFullTimeJobs(checked, 1)
       }else if(query !== "" && location !== ""){
-        props.fetchFilterJobs(query, location, false)
+        props.fetchFilterJobs(query, location, false, 1)
       }else if(location !== "" && checked === true){
-        props.fetchFilterJobs("", location, checked)
+        props.fetchFilterJobs("", location, checked, 1)
       }else if(query !== "" && checked === true){
-        props.fetchFilterJobs(query,"", checked)
+        props.fetchFilterJobs(query,"", checked, 1)
       }
       else if(query !== "" && location !== "" && checked === true){
-        props.fetchFilterJobs(query, location, checked)
+        props.fetchFilterJobs(query, location, checked, 1)
+      }else if(props.latitude != "" && props.longitude == ""){
+        props.fetchCurrentLocationJobs(props.latitude, props.longitude, 1) 
       }else{
-        props.fetchCurrentLocationJobs(props.latitude, props.longitude) 
+        props.fetchJobs(1)
       }
     }
 
@@ -107,6 +109,7 @@ import Button from "@material-ui/core/Button"
 
 const mapStateToProps = state => ({
   jobs: state.jobs.items
+  //page: state.jobs.page
 })
 
 export default connect(mapStateToProps, { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs,
