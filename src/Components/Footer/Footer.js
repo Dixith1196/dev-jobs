@@ -5,8 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button"
 const FooterContainer = styled.div`
   text-align: center;
-//   position: absolute;
-
+//position: absolute;
   bottom: 0;
   width: 100% !important;
   height: 100px !important ;

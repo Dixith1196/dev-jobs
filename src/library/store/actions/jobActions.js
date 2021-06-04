@@ -11,17 +11,9 @@ const actionType = {
     getJobDescription: 'GET_JOB_DESCRIPTION',
     setLoader: 'SET_LODADER',
 }
-
- //const cors_url = "https://cors-anywhere.herokuapp.com/"
-
  const cors_url = "https://api.allorigins.win/raw?url="
 
  const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
-
-// const cors_url = "https://cors-anywhere.herokuapp.com/"
-
-// const BASE_URL = cors_url + 'https://jobs.github.com/positions.json?'
-
 
 export const setLoader = () => dispatch => {
   dispatch({
@@ -82,11 +74,6 @@ export const fetchTermJobs = (desc, page) => dispatch => {
     
     axios.get(`${BASE_URL}description=${desc}&page=${page}`, {
         cancelToken: cancelToken1.token,
-        
-        // params: {
-        //   markdown: true,
-        //   description: desc
-        // }
       })
       .then(res => {
           if(res.data.length > 49){
@@ -157,10 +144,6 @@ export const fetchFullTimeJobs = (fullTime, page) => dispatch => {
     const cancelToken1 = axios.CancelToken.source()
     axios.get(`${BASE_URL}full_time=${fullTime}&page=${page}`, {
         cancelToken: cancelToken1.token,
-        // params: { 
-        //     markdown: true,
-        //     full_time: fullTime
-        //  }
       })
       .then(res => {
         if(res.data.length > 49){

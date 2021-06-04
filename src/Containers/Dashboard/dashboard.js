@@ -15,8 +15,6 @@ import Pagination from '@material-ui/lab/Pagination';
 
  
   if(!mounted){
-    // Code for componentWillMount here
-    // This code is called only one time before intial render
      props.setLoader() 
      props.fetchJobs(1)
   

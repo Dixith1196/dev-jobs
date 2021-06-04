@@ -54,7 +54,6 @@ import Button from "@material-ui/core/Button"
     }
 
     return (
-        // <div>
              <div className="down-content">
             <Input
             placeholder="Filter by title, companies, expertise..."
@@ -89,8 +88,6 @@ import Button from "@material-ui/core/Button"
           <Checkbox
           checked={checked}
           onChange={handleCheck}
-            // checked={state.checkedB}
-            // onChange={handleChange}
             name="checkedB"
             color="primary"
           />
@@ -102,13 +99,11 @@ import Button from "@material-ui/core/Button"
   Search
 </Button>
         </div>
-        // </div>
     )
 }
 
 const mapStateToProps = state => ({
   jobs: state.jobs.items
-  //page: state.jobs.page
 })
 
 export default connect(mapStateToProps, { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs,

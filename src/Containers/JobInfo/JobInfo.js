@@ -18,9 +18,6 @@ import { useParams } from "react-router";
 
 
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //   maxWidth: 345,
-    // },
     media: {
       height: 0,
       paddingTop: '56.25%', // 16:9
@@ -42,22 +39,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 function JobInfo(props) {
-    // const classes = useStyles();
     const classes = useStyles();
-
-    // const theme = useTheme();
-    
-
     const [mounted, setMounted] = useState(false)
 
     let { id } = useParams();
-
-    // const window = (new JSDOM('')).window
-    // const DOMPurify = createDOMPurify(window)
-
     if(!mounted){
-      // Code for componentWillMount here
-      // This code is called only one time before intial render
       props.getJobDescription(id)
     }   
   
