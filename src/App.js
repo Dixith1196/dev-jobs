@@ -3,7 +3,6 @@ import {setLightTheme, setDarkTheme, toggleTheme} from '../src/library/store/act
 import { connect } from 'react-redux'
 import './App.css';
 import Dashboard from '../src/Containers/Dashboard/dashboard'
-import NavBar from "../src/Components/Navbar/Navbar"
 import {HashRouter as Router, Switch, Route} from "react-router-dom"
 
 import { ThemeProvider } from 'styled-components';
@@ -19,7 +18,6 @@ function App(props) {
 <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
 <GlobalStyles />
 <Router>
-        {/* <NavBar /> */}
         <Switch>
               <Route exact path='/' component={Dashboard} />
               <Route exact path='/JobInfo/:id' component={JobInfo} />

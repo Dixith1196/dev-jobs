@@ -89,7 +89,6 @@ export const fetchTermJobs = (desc, page) => dispatch => {
         // }
       })
       .then(res => {
-          console.log(res, "---response is here---")
           if(res.data.length > 49){
             dispatch({
               type: fetchTermJobs,
@@ -126,7 +125,6 @@ export const fetchGivenLocationJobs = (location, page) => dispatch => {
         cancelToken: cancelToken1.token,
       })
       .then(res => {
-        console.log(page,  res.data.length, "---length of given location is here---")
         if(res.data.length > 49){
         dispatch({
             type: fetchGivenLocationJobs,
@@ -249,7 +247,6 @@ export const fetchJobs = (page) => dispatch => {
         params: { markdown: true }
       })
       .then(res => {
-        console.log(res.data.length, "--response should be here--")
         if(res.data.length > 49){
           dispatch({
             type: fetchJobs,

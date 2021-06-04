@@ -27,8 +27,6 @@ const initialState = {
 
 export const jobReducer = (state=initialState, action) =>
  {
-  console.log(action.payload,"---payload is here---")
-  console.log(action.pages,"----action pages are here----")
     switch(action.type) {
     
      case setLoader:

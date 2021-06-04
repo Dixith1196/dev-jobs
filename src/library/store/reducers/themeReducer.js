@@ -33,7 +33,6 @@ export const themeReducer = (state=initialState, action) => {
         }
       
         default: 
-        console.log(initialState.toggle,"---default hits everytime---")
         return{
             theme: "light",
             toggle: false

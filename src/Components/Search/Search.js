@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Search.css'
 
 import { connect } from 'react-redux'
-import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs, getCurrentPage}  from '../../library/store/actions/jobActions';
+import { fetchJobs, fetchCurrentLocationJobs, fetchTermJobs, fetchGivenLocationJobs, fetchFullTimeJobs , fetchFilterJobs }  from '../../library/store/actions/jobActions';
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Input from "@material-ui/core/Input"
 import SearchIcon from "@material-ui/icons/Search";
@@ -31,7 +31,6 @@ import Button from "@material-ui/core/Button"
 
 
     const filterResults = () => {
-      console.log("filter results")
       if(query !== "" && location ==="" && checked === false){
         props.fetchTermJobs(query, 1)
       }else if(query === "" && location !== "" && checked === false){
@@ -47,7 +46,7 @@ import Button from "@material-ui/core/Button"
       }
       else if(query !== "" && location !== "" && checked === true){
         props.fetchFilterJobs(query, location, checked, 1)
-      }else if(props.latitude != "" && props.longitude == ""){
+      }else if(props.latitude !== "" && props.longitude === ""){
         props.fetchCurrentLocationJobs(props.latitude, props.longitude, 1) 
       }else{
         props.fetchJobs(1)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NavBar from '../../Components/Navbar/Navbar'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
@@ -12,7 +12,7 @@ import Pagination from '@material-ui/lab/Pagination';
 
   let history = useHistory();
   const [mounted, setMounted] = useState(false)
-  const [pages, setPages] = useState(1)
+
  
   if(!mounted){
     // Code for componentWillMount here
@@ -30,10 +30,6 @@ import Pagination from '@material-ui/lab/Pagination';
   }
 
   useEffect(() =>{
-    console.log(props.jobs,"---jobs are here---")
-    if(props.jobs > 50){
-       setPages(pages + 1)
-    }
     setMounted(true)
   },[])
 
@@ -62,7 +58,7 @@ import Pagination from '@material-ui/lab/Pagination';
           <Search style={{position: "relative", zIndex: 10}} />
           <div  style={{padding: "7%"}}>
           {props.loading && <CircularProgress style={{display: "flex", margin: "0 auto"}} />}
-          {props.jobs.length == 0 && <h3 style={{textAlign: "center"}}>No Jobs Available for this Search</h3>}
+          {props.jobs.length === 0 && <h3 style={{textAlign: "center"}}>No Jobs Available for this Search</h3>}
            <Typography  variant="body2"  component="p" /> 
               <Grid container spacing={4} direction="row" justify="flex-start" alignItems="flex-start">
           {props.jobs.map((job) => (
